@@ -48,9 +48,6 @@ The numerical results in the paper are organized around three stages: generating
 
 Each simulation script saves intermediate `.mat` files that the subsequent analysis and plotting functions consume. Inspect the individual scripts to adjust carrier frequencies, aperture sizes, and the number of RS elements according to the scenarios described in the paper.
 
-## Plotting and analysis
-
-Post-processing helpers (e.g., `plot_clustering_combine.m`, `plot_boresight_final.m`, `plotting_file.m`) load the saved `.mat` files to recreate the figures reported in the manuscript. Update the file paths at the top of each plotting script to point to your generated datasets before running them.
 
 ## Tips for extending the code
 
