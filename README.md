@@ -1,4 +1,4 @@
-# RS-WPT
+# On the Deployment of Multiple Radio Stripes for Large-Scale Near-Field RF Wireless Power Transfer
 
 Reference MATLAB implementation for the algorithms introduced in the paper "On the Deployment of Multiple Radio Stripes for Large-Scale Near-Field RF Wireless Power Transfer" available at [arXiv:2508.21640](https://arxiv.org/abs/2508.21640). The code explores how reconfigurable surfaces (RSs) can be used to improve multi-user wireless power transfer (WPT) by optimizing the aperture geometry, deployment strategy, and transmit beamforming.
 
