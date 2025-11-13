@@ -28,7 +28,6 @@ The repository is organized around MATLAB scripts that each encapsulate a specif
 | `*_MonteCarlo.m` (e.g., `SGP_SCA_MonteCarlo.m`, `MonteCarlo_Shape_Line.m`, `Angle_Line_MonteCarlo.m`, `Poly_Line_MonteCarlo.m`) | Monte Carlo evaluators that repeatedly call the optimization and beamforming routines over random user deployments to build aggregate performance statistics. |
 | `K_Cheby_Cluster.m`, `K_Cheby_Cluster_Fair_min_newapproach.m` | Cluster-assignment utilities based on Chebyshev distance metrics that determine how users are grouped before optimization. |
 | `cluster_power_monte_opt.m`, `cluster_power_monte_cheby.m`, `cluster_monte.m`, `clustering_simul.m`, `clus_BF_combine_montecarlo.m` | Pre-processing scripts that synthesize clustered user layouts and generate the `.mat` datasets consumed by the simulation drivers. |
-| `plot_*.m` | Post-processing helpers that reproduce the figures in the paper from the stored `.mat` results. |
 
 
 A number of scripts expect supporting `.mat` files (for example `final_locs_defined.mat`, `final_locs_defined_montecarlo_100.mat`, and pre-computed optimization results). These datasets are generated during earlier simulation stages and must be placed in the repository root before running the corresponding experiments.
