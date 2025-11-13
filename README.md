@@ -13,16 +13,22 @@ This README summarizes the repository structure, external dependencies, and the 
 
 ## Repository layout
 
-```
-RS-WPT/
-├── Create_FD.m                     # Grid generator for fully-digital baselines
-├── Create_Rect_RS.m                # Rectangular RS initialization
-├── Do_*.m                          # Optimization, channel, and beamforming primitives
-├── *_simulations.m                 # Entry points for reproducing SGP/SCA case studies
-├── *_MonteCarlo.m                  # Monte Carlo evaluation scripts across scenarios
-├── plot_*.m                        # Post-processing and visualization helpers
-└── README.md                       # Project documentation (this file)
-```
+The repository is organized around MATLAB scripts that each encapsulate a specific modeling or optimization task. The table below lists the most important entry points and helpers.
+
+| File | Purpose |
+| ---- | ------- |
+| `Create_FD.m` | Generate fully-digital baselines by placing active antenna elements on a rectangular grid. The script outputs the element coordinates and power-splitting masks reused during Monte Carlo sweeps. |
+| `Create_Rect_RS.m` | Initialize rectangular radio-stripe layouts with configurable element spacing and stripe length limits. Used as a warm start before geometry optimization. |
+| `Do_SCA.m`, `Do_SGP.m`, `Do_SGP_Line.m`, `Do_SGP_Line_Angle.m`, `Do_SGP_Polygon.m` | Successive convex/geometric programming solvers that update RS element coordinates and per-user power allocations while enforcing collision-free apertures. The line, angle, and polygon variants constrain the solution to the corresponding shapes. |
+| `Do_Beamforming.m` | Evaluate the optimized RS layouts with SDP and MRT beamforming strategies. Ingests the optimized coordinates and channel matrices to compute harvested power per user. |
+| `Do_Channels.m` | Assemble the near-field channel coefficients between each RS element and user by accounting for spherical wavefront propagation and the current deployment geometry. |
+| `Do_Deploy.m`, `Do_Mapping.m` | Map optimized RS clusters to physical stripes and produce deployment schedules that respect hardware reuse constraints. |
+| `Do_Cluster_BF.m` | Compare cluster-based beamforming solutions between RS and fully-digital baselines using the same user drops. |
+| `*_simulations.m` (e.g., `SGP_simulations.m`, `SCA_simulations.m`, `Polygon_simulations.m`, `Line_simulations.m`) | High-level drivers that iterate over frequencies, aperture lengths, and user sets to reproduce the optimization case studies reported in the paper. These scripts save intermediate `.mat` files for later analysis. |
+| `*_MonteCarlo.m` (e.g., `SGP_SCA_MonteCarlo.m`, `MonteCarlo_Shape_Line.m`, `Angle_Line_MonteCarlo.m`, `Poly_Line_MonteCarlo.m`) | Monte Carlo evaluators that repeatedly call the optimization and beamforming routines over random user deployments to build aggregate performance statistics. |
+| `K_Cheby_Cluster.m`, `K_Cheby_Cluster_Fair_min_newapproach.m` | Cluster-assignment utilities based on Chebyshev distance metrics that determine how users are grouped before optimization. |
+| `cluster_power_monte_opt.m`, `cluster_power_monte_cheby.m`, `cluster_monte.m`, `clustering_simul.m`, `clus_BF_combine_montecarlo.m` | Pre-processing scripts that synthesize clustered user layouts and generate the `.mat` datasets consumed by the simulation drivers. |
+| `plot_*.m` | Post-processing helpers that reproduce the figures in the paper from the stored `.mat` results. |
 
 A number of scripts expect supporting `.mat` files (for example `final_locs_defined.mat`, `final_locs_defined_montecarlo_100.mat`, and pre-computed optimization results). These datasets are generated during earlier simulation stages and must be placed in the repository root before running the corresponding experiments.
 
