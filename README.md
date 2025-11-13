@@ -30,6 +30,7 @@ The repository is organized around MATLAB scripts that each encapsulate a specif
 | `cluster_power_monte_opt.m`, `cluster_power_monte_cheby.m`, `cluster_monte.m`, `clustering_simul.m`, `clus_BF_combine_montecarlo.m` | Pre-processing scripts that synthesize clustered user layouts and generate the `.mat` datasets consumed by the simulation drivers. |
 | `plot_*.m` | Post-processing helpers that reproduce the figures in the paper from the stored `.mat` results. |
 
+
 A number of scripts expect supporting `.mat` files (for example `final_locs_defined.mat`, `final_locs_defined_montecarlo_100.mat`, and pre-computed optimization results). These datasets are generated during earlier simulation stages and must be placed in the repository root before running the corresponding experiments.
 
 ## Requirements
